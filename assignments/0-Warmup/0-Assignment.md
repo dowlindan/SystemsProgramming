@@ -34,11 +34,11 @@ Please provide answers to these questions using markdown notation and place them
     - [ ] NO - Not Yet
 
 
-3. Please provide a link to the repository you are using for this class.
+3. Please provide a link to the repository you are using for this class.    
 https://github.com/dowlindan/SystemsProgramming
 
-4. Briefly describe what you want to get out of this class.
-I hope to get a better understanding of how the computer communicates with the operating system, as I think this is something not only important but interesting.
+4. Briefly describe what you want to get out of this class.     
+I mostly hope to get a better understanding of how the computer communicates with the operating system, as I think this is something not only important but interesting.
 
-5. Briefly describe any concerns you might be having with being successful in this class (if any).
+5. Briefly describe any concerns you might be having with being successful in this class (if any).      
 My biggest hope is that the instructions for each assignment will be easy to follow. A previous professor I had gave vague directions often.
