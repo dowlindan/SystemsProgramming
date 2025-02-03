@@ -289,13 +289,25 @@ int count_db_records(int fd){
 int print_db(int fd){
     student_t* temp_s = (student_t*) malloc(STUDENT_RECORD_SIZE);
     int read_rv;
-    printf(STUDENT_PRINT_HDR_STRING, "ID", "FIRST NAME", "LAST_NAME", "GPA");
+    
+    bool empty = true;
+
     while ((read_rv = read(fd, temp_s, STUDENT_RECORD_SIZE)) > 0) {
         if (memcmp(temp_s, &EMPTY_STUDENT_RECORD, STUDENT_RECORD_SIZE) == 0 || temp_s == NULL) {
             continue;
         }
+
+        if (empty == true) {
+            printf(STUDENT_PRINT_HDR_STRING, "ID", "FIRST_NAME", "LAST_NAME", "GPA");
+            empty = false;
+        }
+
         float calculated_gpa_from_student = temp_s->gpa/100.0;
         printf(STUDENT_PRINT_FMT_STRING, temp_s->id, temp_s->fname, temp_s->lname, calculated_gpa_from_student);
+    }
+
+    if (empty) {
+        printf(M_DB_EMPTY);
     }
 
     free(temp_s);
@@ -338,7 +350,13 @@ int print_db(int fd){
  *            
  */
 void print_student(student_t *s){
-    printf(M_NOT_IMPL);
+    if (s == NULL || s->id == 0) {
+        printf(M_ERR_STD_PRINT);
+        return;
+    }
+    float calculated_gpa_from_s = s->gpa / 100.0;
+    printf(STUDENT_PRINT_HDR_STRING, "ID", "FIRST_NAME", "LAST_NAME", "GPA");
+    printf(STUDENT_PRINT_FMT_STRING, s->id, s->fname, s->lname, calculated_gpa_from_s);
 }
 
 /*
