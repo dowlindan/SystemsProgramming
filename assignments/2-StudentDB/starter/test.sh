@@ -15,34 +15,34 @@ setup_file() {
 }
 
 @test "Add a student 1 to db" {
-    run ./sdbsc -a 1      john doe 3.45
+    run ./sdbsc -a 1      john doe 345
     [ "$status" -eq 0 ]
     [ "${lines[0]}" = "Student 1 added to database." ]
 }
 
 @test "Add more students to db" {
-    run ./sdbsc -a 3      jane  doe  3.90
+    run ./sdbsc -a 3      jane  doe  390
     [ "$status" -eq 0 ]
     [ "${lines[0]}" = "Student 3 added to database." ] || {
         echo "Failed Output:  $output"
         return 1
     }
 
-    run ./sdbsc -a 63     jim   doe  2.85
+    run ./sdbsc -a 63     jim   doe  285
     [ "$status" -eq 0 ]
     [ "${lines[0]}" = "Student 63 added to database." ] || {
         echo "Failed Output:  $output"
         return 1
     }
 
-    run ./sdbsc -a 64     janet doe  3.10
+    run ./sdbsc -a 64     janet doe  310
     [ "$status" -eq 0 ]
     [ "${lines[0]}" = "Student 64 added to database." ] || {
         echo "Failed Output:  $output"
         return 1
     }
 
-    run ./sdbsc -a 99999  big   dude 2.05
+    run ./sdbsc -a 99999  big   dude 205
     [ "$status" -eq 0 ]
     [ "${lines[0]}" = "Student 99999 added to database." ] || {
         echo "Failed Output:  $output"
@@ -165,7 +165,7 @@ setup_file() {
     normalized_output=$(echo -n "$output" | tr -s '[:space:]' ' ')
 
     # Define the expected output (normalized)
-    expected_output="ID FIRST NAME LAST_NAME GPA 1 john doe 0.03 3 jane doe 0.03 63 jim doe 0.02 99999 big dude 0.02"
+    expected_output="ID FIRST_NAME LAST_NAME GPA 1 john doe 0.03 3 jane doe 0.03 63 jim doe 0.02 99999 big dude 0.02"
 
     # Compare the normalized output
     [ "$normalized_output" = "$expected_output" ] || {
