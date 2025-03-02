@@ -19,7 +19,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="$HOME/tmp/dsh-testdsh2>dsh2>dsh2>cmdloopreturned0"
+    expected_output="$HOME/tmp/dsh-testdsh3>dsh3>dsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -50,7 +50,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="/tmpdsh2>dsh2>dsh2>cmdloopreturned0"
+    expected_output="/tmpdsh3>dsh3>dsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -76,7 +76,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="/usr/bin/whichdsh2>dsh2>cmdloopreturned0"
+    expected_output="/usr/bin/whichdsh3>dsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -98,7 +98,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '\t\n\r\f\v')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output=" hello     world     dsh2> dsh2> cmd loop returned 0"
+    expected_output=" hello     world     dsh3> dsh3> cmd loop returned 0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -130,7 +130,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="dsh2>warning:nocommandsprovideddsh2>cmdloopreturned0"
+    expected_output="dsh3>warning:nocommandsprovideddsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -155,7 +155,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="dsh2>cmdloopreturned0"
+    expected_output="dsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -180,7 +180,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="dsh2>Impropercdusagedsh2>cmdloopreturned0"
+    expected_output="dsh3>Impropercdusagedsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -205,7 +205,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="dsh2>Unrecognizedcommanddsh2>dsh2>cmdloopreturned0"
+    expected_output="dsh3>Unrecognizedcommanddsh3>dsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -230,7 +230,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="dsh2>Error:Commandorargstoolargedsh2>cmdloopreturned0"
+    expected_output="dsh3>Error:Commandorargstoolargedsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -255,7 +255,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="dsh2>Unrecognizedcommanddsh2>dsh2>cmdloopreturned0"
+    expected_output="dsh3>Unrecognizedcommanddsh3>dsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -281,7 +281,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="stretdsh2>dsh2>dsh2>cmdloopreturned0"
+    expected_output="stretdsh3>dsh3>dsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -306,7 +306,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="dsh2>warning:nocommandsprovideddsh2>cmdloopreturned0"
+    expected_output="dsh3>warning:nocommandsprovideddsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -331,7 +331,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="dsh2>warning:nocommandsprovideddsh2>cmdloopreturned0"
+    expected_output="dsh3>warning:nocommandsprovideddsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -362,7 +362,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="jimmy${current}dsh2>dsh2>dsh2>Unrecognizedcommanddsh2>dsh2>dsh2>dsh2>cmdloopreturned0"
+    expected_output="jimmy${current}dsh3>dsh3>dsh3>Unrecognizedcommanddsh3>dsh3>dsh3>dsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -394,7 +394,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="jimmyjohnson${current}dsh2>dsh2>dsh2>Error:Commandorargstoolargedsh2>dsh2>cmdloopreturned0"
+    expected_output="jimmyjohnson${current}dsh3>dsh3>dsh3>Error:Commandorargstoolargedsh3>dsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
@@ -429,7 +429,7 @@ EOF
     stripped_output=$(echo "$output" | tr -d '[:space:]')
 
     # Expected output with all whitespace removed for easier matching
-    expected_output="jimmyjohnsonthreesdaydsh2>cmdloopreturned0jimmyjimmyjohnsonhenryechoecho/home/djd439/CS283/SystemsProgramming/assignments/4-ShellP2/starterdsh2>dsh2>dsh2>dsh2>dsh2>dsh2>cmdloopreturned0"
+    expected_output="jimmyjohnsonthreesdaydsh3>cmdloopreturned0jimmyjimmyjohnsonhenryechoecho${current}dsh3>dsh3>dsh3>dsh3>dsh3>dsh3>cmdloopreturned0"
 
     # These echo commands will help with debugging and will only print
     #if the test fails
