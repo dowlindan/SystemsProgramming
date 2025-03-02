@@ -10,12 +10,6 @@
 // Longest command that can be read from the shell
 #define SH_CMD_MAX EXE_MAX + ARG_MAX
 
-typedef struct command
-{
-    char exe[EXE_MAX];
-    char args[ARG_MAX];
-} command_t;
-
 typedef struct cmd_buff
 {
     int  argc;
@@ -73,6 +67,7 @@ typedef enum {
     BI_CMD_CD,
     BI_NOT_BI,
     BI_EXECUTED,
+    BI_RC,
 } Built_In_Cmds;
 Built_In_Cmds match_command(const char *input); 
 Built_In_Cmds exec_built_in_cmd(cmd_buff_t *cmd);
