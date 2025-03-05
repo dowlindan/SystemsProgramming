@@ -141,6 +141,30 @@ Built_In_Cmds exec_built_in_cmd(cmd_buff_t *cmd) {
     }
 }
 
+int exec_cmd(cmd_buff_t *cmd) {
+    Built_In_Cmds exec_builtin_rc = exec_built_in_cmd(cmd);
+    if (exec_builtin_rc == BI_CMD_EXIT) {
+        return OK_EXIT;
+    }
+    if (exec_builtin_rc == BI_NOT_BI) {
+        int fork_rc, exec_rc;
+        fork_rc = fork();
+        if (fork_rc < 0) {
+            printf("Fork Error\n");
+        }
+        else if (fork_rc == 0) {
+            int execvp_rc = execvp(cmd->argv[0], cmd->argv);
+            if (execvp_rc < 0) {
+                printf("Unrecognized command\n");
+                exit(1);
+            }
+        } else {
+            wait(&exec_rc);
+        }
+    }
+    clear_cmd_buff(cmd);
+    return OK;
+}
 /*
  * Implement your exec_local_cmd_loop function by building a loop that prompts the 
  * user for input.  Use the SH_PROMPT constant from dshlib.h and then
@@ -208,27 +232,10 @@ int exec_local_cmd_loop()
         } else if (rc == WARN_NO_CMDS) {
             printf(CMD_WARN_NO_CMD);
         } else {
-            Built_In_Cmds exec_builtin_rc = exec_built_in_cmd(cmd);
-            if (exec_builtin_rc == BI_CMD_EXIT) {
+            int exec_cmd_rc = exec_cmd(cmd);
+            if (exec_cmd_rc == OK_EXIT) {
                 return OK;
             }
-            if (exec_builtin_rc == BI_NOT_BI) {
-                int fork_rc, exec_rc;
-                fork_rc = fork();
-                if (fork_rc < 0) {
-                    printf("Fork Error\n");
-                }
-                else if (fork_rc == 0) {
-                    int execvp_rc = execvp(cmd->argv[0], cmd->argv);
-                    if (execvp_rc < 0) {
-                        printf("Unrecognized command\n");
-                        exit(1);
-                    }
-                } else {
-                    wait(&exec_rc);
-                }
-            }
-            clear_cmd_buff(cmd);
         }
 
     }
