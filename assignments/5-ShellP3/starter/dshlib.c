@@ -157,7 +157,7 @@ int build_cmd_list(char *cmd_line, command_list_t *clist)
         return WARN_NO_CMDS;
     }
 
-    char* pipe_token = strtok(cmd_line, PIPE_STRING);
+    char* pipe_token = strtok(trim(cmd_line), PIPE_STRING);
     int command_index = 0;
     
     while (pipe_token != NULL) {
