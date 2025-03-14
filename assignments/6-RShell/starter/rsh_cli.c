@@ -11,7 +11,8 @@
 #include "dshlib.h"
 #include "rshlib.h"
 
-
+//static uint8_t send_buffer[RDSH_COMM_BUFF_SZ];
+//static uint8_t recv_buffer[RDSH_COMM_BUFF_SZ];
 
 
 /*
@@ -99,7 +100,12 @@ int exec_remote_cmd_loop(char *address, int port)
     int is_eof;
 
     // TODO set up cmd and response buffs
-
+    cmd_buff = (char*) malloc(SH_CMD_MAX);
+    rsp_buff = (char*) malloc(SH_CMD_MAX);
+    if (cmd_buff == NULL || rsp_buff == NULL) {
+        return ERR_MEMORY;
+    }
+    
     cli_socket = start_client(address,port);
     if (cli_socket < 0){
         perror("start client");
@@ -108,6 +114,55 @@ int exec_remote_cmd_loop(char *address, int port)
 
     while (1) 
     {
+        memset(cmd_buff, 0, SH_CMD_MAX);
+        
+        printf("%s", SH_PROMPT);
+        if (fgets(cmd_buff, ARG_MAX, stdin) == NULL)
+        {
+            printf("\n");
+            break;
+        }
+        
+        cmd_buff[strcspn(cmd_buff, "\n")] = '\0';
+
+        int send_len = strlen(cmd_buff) + 1;
+
+        int ret = send(cli_socket, cmd_buff, send_len, 0);
+
+        if (ret == -1) {
+            perror("send");
+            return client_cleanup(cli_socket, cmd_buff, rsp_buff, ERR_RDSH_COMMUNICATION);
+        }
+
+        int recv_size;
+        while (1) {
+            recv_size = recv(cli_socket, rsp_buff, RDSH_COMM_BUFF_SZ, 0);
+            if (recv_size < 0) {
+                perror("read error");
+                return client_cleanup(cli_socket, cmd_buff, rsp_buff, ERR_RDSH_COMMUNICATION);
+            } 
+            if (recv_size == 0) {
+                perror("server down");
+                return client_cleanup(cli_socket, cmd_buff, rsp_buff, ERR_RDSH_COMMUNICATION);
+            }
+
+            is_eof = ((char)rsp_buff[recv_size-1] == RDSH_EOF_CHAR) ? 1 : 0;
+            
+            if (is_eof) {
+                rsp_buff[recv_size-1] = '\0';
+            }
+
+            printf("%.*s", (int)recv_size, rsp_buff);
+            
+            if (is_eof) {
+                break;
+            }
+        }        
+        
+        
+        if (strcmp(cmd_buff, EXIT_CMD) == 0 || strcmp(cmd_buff, "stop-server") == 0) {
+            break;
+        }
         // TODO print prompt
 
         // TODO fgets input
@@ -151,6 +206,23 @@ int start_client(char *server_ip, int port){
     int ret;
 
     // TODO set up cli_socket
+    cli_socket = socket(AF_INET, SOCK_STREAM, 0);
+    if (cli_socket == -1) {
+        perror("socket");
+        exit(EXIT_FAILURE);
+    }
+
+    memset(&addr, 0, sizeof(struct sockaddr_in));
+    addr.sin_family = AF_INET;
+    addr.sin_addr.s_addr = inet_addr(server_ip);
+    addr.sin_port = htons(port);
+
+    ret = connect (cli_socket, (const struct sockaddr *) &addr,
+                   sizeof(struct sockaddr_in));
+    if (ret == -1) {
+        fprintf(stderr, "The server is down.\n");
+        exit(EXIT_FAILURE);
+    }
 
 
     return cli_socket;
